@@ -1,0 +1,136 @@
+<div class="row p-2">
+ 
+    <div class="col-4">
+        <div class="d-grid gap-2"><button class="btn btn-secondary" [routerLink]="['/cliente']" routerLinkActive="active" >CLIENTE</button></div>
+    </div> 
+    <div class="col-4">
+        <div class="d-grid gap-2"><button class="btn btn-secondary " [routerLink]="['/banco']" routerLinkActive="active" >BANCO</button></div>
+    </div> 
+    
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card text-white mb-3">
+            <div class="card-header  bg-primary text-center" >REGISTRO DE CLIENTE</div>
+            <div class="card-body text-black">
+ 
+                <div class="row justify-content-center align-items-center ">
+                            <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6">
+                                <div class="col-md-12">
+                                  <label for="id" class="form-label">Identificación</label>
+                                  <input [(ngModel)]="ID" type="text" class="form-control" id="id" required="">
+                                </div>
+                                
+                                <div class="col-md-12">
+                                  <label for="name" class="form-label">Nombre</label>
+                                  <input [(ngModel)]="NAME" type="text" class="form-control text-uppercase" id="name" required="">
+                                </div>
+                                
+                                <div class="col-md-12">
+                                  <label for="origin" class="form-label">Origen</label>
+                                  <input [(ngModel)]="ORIGIN" type="text" class="form-control text-uppercase" id="origin" required="">
+                                </div>
+                                
+                                <div class="col-md-12">
+                                  <label for="age" class="form-label">Edad</label>
+                                  <input [(ngModel)]="AGE" type="number" class="form-control" id="age" required="">
+                                </div>
+                  
+                                <div class="col-md-12">
+                                  <input [(ngModel)]="STATUS" type="hidden" class="form-control" id="status" value="A" required="">
+                                </div>
+                                
+                                <div class="col-12 pt-2">
+                                  <button type="submit" class="btn btn-primary" (click)="registrarCliente()">Registrar</button>
+                                </div>
+ 
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-black">
+        <table class="table">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>EDAD</th>
+                    <th>STATUS</th>
+                    <th>OPCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{cliente.ID}}</td>
+                    <td>{{cliente.NAME}}</td>
+                    <td>{{cliente.AGE}}</td>
+                    <td>{{cliente.STATUS}}</td>
+                    <td> 
+                        <button 
+                            (click)="editarCliente(cliente)"
+                            class="btn btn-primary btn-sm" data-bs-toggle="modal" 
+                            data-bs-target="#exampleModal"> <span> <i class="fas fa-user-edit"></i> </span> </button>
+                        <button 
+                        (click)="eliminarCliente(cliente)"
+                        class="btn btn-danger btn-sm"> <span> <i class="fas fa-trash"></i> </span> </button>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">EDITAR CLIENTE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6">
+                    <div class="col-md-12">
+                      <label for="id" class="form-label">Identificación</label>
+                      <input disabled [(ngModel)]="clienteSeleccionado.ID" type="text" class="form-control" id="id" required="">
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label for="name" class="form-label">Nombre</label>
+                      <input [(ngModel)]="clienteSeleccionado.NAME" type="text" class="form-control text-uppercase" id="name" required="">
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label for="origin" class="form-label">Origen</label>
+                      <input [(ngModel)]="clienteSeleccionado.ORIGIN" type="text" class="form-control text-uppercase" id="origin" required="">
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label for="age" class="form-label">Edad</label>
+                      <input [(ngModel)]="clienteSeleccionado.AGE" type="number" class="form-control" id="age" required="">
+                    </div>
+      
+                    <div class="col-md-12">
+                      <input [(ngModel)]="clienteSeleccionado.STATUS" type="hidden" class="form-control" id="status" value="A" required="">
+                    </div>
+ 
+
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editarInformacionCliente()">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
